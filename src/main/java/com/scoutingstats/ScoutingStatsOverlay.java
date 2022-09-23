@@ -1,4 +1,4 @@
-package com.ScoutingStats;
+package com.scoutingstats;
 
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.components.LineComponent;
