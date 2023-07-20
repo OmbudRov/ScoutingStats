@@ -8,7 +8,7 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
 
 import java.awt.*;
 
-public class ScoutingStatsOverlay extends Overlay
+public class ScoutingStatsOverlay extends OverlayPanel
 {
 	private final ScoutingStatsPlugin plugin;
 	public int Entries;
