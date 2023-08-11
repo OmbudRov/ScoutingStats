@@ -11,17 +11,22 @@ import java.awt.*;
 public class ScoutingStatsOverlay extends OverlayPanel
 {
 	private final ScoutingStatsPlugin plugin;
+	private final ScoutingStatsConfig config;
 	public int Entries;
 	public int Exits;
+	public int TotalEntries;
+	public int TotalExits;
 	private final PanelComponent panelComponent = new PanelComponent();
 
-	ScoutingStatsOverlay(ScoutingStatsPlugin plugin, int Entries, int Exits)
+	ScoutingStatsOverlay(ScoutingStatsPlugin plugin, ScoutingStatsConfig config, int Entries, int Exits, int TotalEntries, int TotalExits)
 	{
 		super(plugin);
+		this.config = config;
 		this.Entries = Entries;
 		this.Exits = Exits;
+		this.TotalEntries = TotalEntries;
+		this.TotalExits = TotalExits;
 		this.plugin = plugin;
-
 		setPosition(OverlayPosition.ABOVE_CHATBOX_RIGHT);
 	}
 
@@ -33,9 +38,22 @@ public class ScoutingStatsOverlay extends OverlayPanel
 		String Title = "Scouting Stats";
 		panelComponent.getChildren().add(TitleComponent.builder().text(Title).build());
 
-		panelComponent.getChildren().add(LineComponent.builder().left("Entries:").right(String.valueOf(plugin.Entries)).build());
-
-		panelComponent.getChildren().add(LineComponent.builder().left("Exits:").right(String.valueOf(plugin.Exits)).build());
+		if(config.RaidsEntered())
+		{
+			panelComponent.getChildren().add(LineComponent.builder().left("Entries:").right(String.valueOf(Entries)).build());
+		}
+		if(config.TotalRaidsEntered())
+		{
+			panelComponent.getChildren().add(LineComponent.builder().left("Total Entries:").right(String.valueOf(TotalEntries)).build());
+		}
+		if(config.RaidsExited())
+		{
+			panelComponent.getChildren().add(LineComponent.builder().left("Exits:").right(String.valueOf(Exits)).build());
+		}
+		if(config.TotalRaidsExited())
+		{
+			panelComponent.getChildren().add(LineComponent.builder().left("Entries:").right(String.valueOf(TotalExits)).build());
+		}
 		return panelComponent.render(graphics);
 	}
 }
